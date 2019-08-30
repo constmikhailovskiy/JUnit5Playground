@@ -8,9 +8,7 @@ import com.nhaarman.mockitokotlin2.inOrder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
 
@@ -31,35 +29,63 @@ class DetailsPresenterTest {
         presenter.unbindView()
     }
 
-    @Test
-    fun `load details successfully`() {
-        val request = GetDetailsRequest(id = 42)
-        val details = Details()
-        whenever(getDetailsUseCase.get(request)).thenReturn(Single.just(details))
+    /* ... */
 
-        presenter.loadDetails()
+    @Nested
+    @DisplayName("details loading scenarios")
+    inner class DetailsLoadingScenarios {
 
-        inOrder(getDetailsUseCase, view) {
-            verify(getDetailsUseCase).get(request)
-            verify(view).updateDetailsState(DetailsState.Loading)
-            verify(view).updateDetailsState(DetailsState.Loaded(details))
-            verifyNoMoreInteractions()
+        @Test
+        fun `load details successfully`() {
+            val request = GetDetailsRequest(id = 42)
+            val details = Details()
+            whenever(getDetailsUseCase.get(request)).thenReturn(Single.just(details))
+
+            presenter.loadDetails()
+
+            inOrder(getDetailsUseCase, view) {
+                verify(getDetailsUseCase).get(request)
+                verify(view).updateDetailsState(DetailsState.Loading)
+                verify(view).updateDetailsState(DetailsState.Loaded(details))
+                verifyNoMoreInteractions()
+            }
+        }
+
+        @Test
+        fun `load details with failure`() {
+            val request = GetDetailsRequest(id = 42)
+            whenever(getDetailsUseCase.get(request)).thenReturn(Single.error(
+                Throwable("Could not load details :(")))
+
+            presenter.loadDetails()
+
+            inOrder(getDetailsUseCase, view) {
+                verify(getDetailsUseCase).get(request)
+                verify(view).updateDetailsState(DetailsState.Loading)
+                verify(view).updateDetailsState(DetailsState.Error)
+                verifyNoMoreInteractions()
+            }
         }
     }
 
-    @Test
-    fun `load details with failure`() {
-        val request = GetDetailsRequest(id = 42)
-        whenever(getDetailsUseCase.get(request)).thenReturn(Single.error(
-            Throwable("Could not load details :(")))
+    @Nested
+    @DisplayName("adding to favorites functionality scenarios")
+    inner class AddToFavoritesFunctionalityScenarios {
 
-        presenter.loadDetails()
+        @Test
+        fun `add to favorites successfully`() {
 
-        inOrder(getDetailsUseCase, view) {
-            verify(getDetailsUseCase).get(request)
-            verify(view).updateDetailsState(DetailsState.Loading)
-            verify(view).updateDetailsState(DetailsState.Error)
-            verifyNoMoreInteractions()
         }
+
+        @Test
+        fun `add to favorites with failure`() {
+
+        }
+    }
+
+    @Nested
+    @DisplayName("quiz selection scenarios")
+    inner class QuizSelectionScenarios {
+        /* ... */
     }
 }

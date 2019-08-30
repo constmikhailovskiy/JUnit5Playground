@@ -1,4 +1,4 @@
-package com.betterme.domain
+package com.betterme.domain.base
 
 import io.reactivex.Scheduler
 

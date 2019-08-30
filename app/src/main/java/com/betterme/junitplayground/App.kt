@@ -1,7 +1,7 @@
 package com.betterme.junitplayground
 
 import android.app.Application
-import com.betterme.domain.AppSchedulers
+import com.betterme.domain.base.AppSchedulers
 
 class App : Application() {
 

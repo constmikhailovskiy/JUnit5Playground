@@ -1,5 +1,6 @@
 package com.betterme.domain
 
+import com.betterme.domain.base.UseCaseSingleWithRequest
 import io.reactivex.Single
 
 class GetDetailsUseCase : UseCaseSingleWithRequest<Details, GetDetailsRequest>() {

@@ -4,5 +4,5 @@ interface DetailsView {
 
     fun updateDetailsState(detailsState: DetailsState)
 
-    fun updateDetonatorTime(timeLeft: Int)
+    fun quizLiked(success: Boolean)
 }

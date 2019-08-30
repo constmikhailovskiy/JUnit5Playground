@@ -1,6 +1,6 @@
 package com.betterme.junitplayground.details
 
-import com.betterme.domain.AppSchedulers
+import com.betterme.domain.base.AppSchedulers
 import com.betterme.domain.GetDetailsRequest
 import com.betterme.domain.GetDetailsUseCase
 import io.reactivex.disposables.CompositeDisposable
@@ -32,5 +32,9 @@ class DetailsPresenter(
                     detailsView?.updateDetailsState(DetailsState.Error)
                 })
         )
+    }
+
+    fun addQuizToFavorites(quizId: Int) {
+
     }
 }

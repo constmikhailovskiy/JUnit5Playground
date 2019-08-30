@@ -7,12 +7,15 @@ import com.betterme.junitplayground.utils.converters.PurchaseStateArgumentConver
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.converter.ConvertWith
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.EnumSource
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
+
+private const val TAG_PAID_UNPAID_LOGIC = "paid_unpaid_logic"
 
 class AppCoordinatorTest {
 
@@ -51,6 +54,7 @@ class AppCoordinatorTest {
         verifyNoMoreInteractions(navigator)
     }
 
+    @Tag(TAG_PAID_UNPAID_LOGIC)
     @ParameterizedTest(name = "try to access paid content with {0}")
     @ValueSource(strings = ["SubscriptionAvailable", "SubscriptionExpired", "NoSubscription"])
     fun `try to access paid content`(
@@ -90,6 +94,7 @@ class AppCoordinatorTest {
         verifyNoMoreInteractions(navigator)
     }
 
+    @Tag(TAG_PAID_UNPAID_LOGIC)
     @ParameterizedTest(name = "open trivia for the user with {0} subscription state and {1} desired trivia level")
     @MethodSource("createPaidTriviaGameArgs")
     fun `open trivia fame for the user with a certain subscription state`(

@@ -1,4 +1,4 @@
-package com.betterme.domain
+package com.betterme.domain.base
 
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable

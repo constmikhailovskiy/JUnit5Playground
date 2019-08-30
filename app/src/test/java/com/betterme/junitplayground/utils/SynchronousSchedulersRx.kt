@@ -1,7 +1,7 @@
 package com.betterme.junitplayground.utils
 
-import com.betterme.domain.AppSchedulers
-import com.betterme.domain.SchedulerProvider
+import com.betterme.domain.base.AppSchedulers
+import com.betterme.domain.base.SchedulerProvider
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import org.junit.rules.ExternalResource

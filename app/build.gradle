@@ -27,12 +27,15 @@ android {
         }
     }
 
-    testOptions {
 
+    testOptions {
         junitPlatform {
             filters {
                 engines {
                     include 'junit', 'junit-jupiter', 'junit-vintage'
+                }
+                tags {
+                    exclude 'paid_unpaid_logic'
                 }
             }
             jacocoOptions {
