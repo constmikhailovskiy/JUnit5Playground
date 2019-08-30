@@ -1,17 +1,16 @@
-package com.betterme.junitplayground
+package com.betterme.junitplayground.utils
 
 import com.betterme.domain.AppSchedulers
 import com.betterme.domain.SchedulerProvider
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
-import org.junit.jupiter.api.extension.BeforeAllCallback
-import org.junit.jupiter.api.extension.ExtensionContext
+import org.junit.rules.ExternalResource
 
-class SynchronousSchedulersExtension : BeforeAllCallback {
+class SynchronousSchedulersRx : ExternalResource() {
 
-    override fun beforeAll(context: ExtensionContext?) {
+    @Throws(Throwable::class)
+    public override fun before() {
         AppSchedulers.setInstance(object : SchedulerProvider {
-
             override fun mainThread(): Scheduler = Schedulers.trampoline()
 
             override fun io(): Scheduler = Schedulers.trampoline()
@@ -22,6 +21,5 @@ class SynchronousSchedulersExtension : BeforeAllCallback {
 
             override fun trampoline(): Scheduler = Schedulers.trampoline()
         })
-
     }
 }

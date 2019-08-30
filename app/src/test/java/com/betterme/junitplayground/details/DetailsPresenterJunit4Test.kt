@@ -3,30 +3,35 @@ package com.betterme.junitplayground.details
 import com.betterme.domain.Details
 import com.betterme.domain.GetDetailsRequest
 import com.betterme.domain.GetDetailsUseCase
-import com.betterme.junitplayground.utils.SynchronousSchedulersExtension
+import com.betterme.junitplayground.utils.SynchronousSchedulersRx
 import com.nhaarman.mockitokotlin2.inOrder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.junit.jupiter.MockitoExtension
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnitRunner
 
-@ExtendWith(MockitoExtension::class, SynchronousSchedulersExtension::class)
-class DetailsPresenterTest {
+@RunWith(MockitoJUnitRunner::class)
+class DetailsPresenterJunit4Test {
 
     private val getDetailsUseCase: GetDetailsUseCase = mock()
     private val view: DetailsView = mock()
     private val presenter = DetailsPresenter(getDetailsUseCase)
 
-    @BeforeEach
+    @Rule
+    @JvmField
+    val rules = SynchronousSchedulersRx()
+
+    @Before
     fun setUp() {
         presenter.bindView(view)
     }
 
-    @AfterEach
+    @After
     fun tearDown() {
         presenter.unbindView()
     }
