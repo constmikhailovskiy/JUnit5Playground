@@ -7,7 +7,10 @@ import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode
 
+@Execution(ExecutionMode.SAME_THREAD)
 class ShakenColaCanTest {
 
     private val detonator: ColaCanDetonator = mock()
